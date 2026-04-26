@@ -38,3 +38,44 @@ L'ordre de lancement est important : commencez par le serveur.
    `cd backglass && npm install && npm run dev`
 4. **DMD (Port 5175)** :
    `cd dmd && npm install && npm run dev`
+
+## 🐳 Docker
+
+Lancement de l'ensemble du projet en une seule commande, sans rien installer localement (hors Docker).
+
+### Prérequis
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installé et démarré
+
+### Commandes
+
+```bash
+# Build et démarrage de tous les services
+docker compose up --build
+
+# Démarrage en arrière-plan
+docker compose up --build -d
+
+# Arrêt des services
+docker compose down
+
+# Logs en temps réel
+docker compose logs -f
+
+# Logs d'un service spécifique
+docker compose logs -f server
+```
+
+### Accès aux interfaces
+
+| Interface | URL |
+| :--- | :--- |
+| Serveur (WebSocket) | http://localhost:3000 |
+| Playfield (3D) | http://localhost:5173 |
+| Backglass (Score) | http://localhost:5174 |
+| DMD (Dot Matrix) | http://localhost:5175 |
+
+### Flux MVP à vérifier
+
+Une fois les 4 services démarrés, ouvrir les 4 URLs dans des onglets séparés.  
+Le flux complet `start_game → collision → ball_lost → game_over` doit fonctionner sans régression.
