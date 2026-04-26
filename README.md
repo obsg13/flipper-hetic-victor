@@ -39,20 +39,17 @@ L'ordre de lancement est important : commencez par le serveur.
 4. **DMD (Port 5175)** :
    `cd dmd && npm install && npm run dev`
 
-## Docker
+## 🐳 Docker
 
-Lancement de l’ensemble du projet sans installer Node globalement sur la machine (hors moteur Docker). Chaque service a un `Dockerfile` à la racine du workspace (`server/`, `playfield/`, etc.) : `npm ci` ciblé sur ce workspace + copie minimale de `shared/`, pour des images plus légères que la copie complète du dépôt.
+Lancement de l'ensemble du projet en une seule commande, sans rien installer localement (hors Docker).
 
 ### Prérequis
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (ou moteur Docker + Compose v2) installé et démarré
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installé et démarré
 
 ### Commandes
 
 ```bash
-# Build des images
-docker compose build
-
 # Build et démarrage de tous les services
 docker compose up --build
 
@@ -69,8 +66,6 @@ docker compose logs -f
 docker compose logs -f server
 ```
 
-Les frontends ne passent `healthy` qu’une fois le serveur prêt (healthcheck HTTP sur le port 3000).
-
 ### Accès aux interfaces
 
 | Interface | URL |
@@ -82,4 +77,5 @@ Les frontends ne passent `healthy` qu’une fois le serveur prêt (healthcheck H
 
 ### Flux MVP à vérifier
 
-Une fois les 4 services démarrés, ouvrir les URLs des trois Vite + vérifier la connexion au serveur. Le flux complet `start_game → collision → ball_lost → game_over` doit fonctionner sans régression en conteneurs (même comportement qu’en local hors Docker).
+Une fois les 4 services démarrés, ouvrir les 4 URLs dans des onglets séparés.  
+Le flux complet `start_game → collision → ball_lost → game_over` doit fonctionner sans régression.
